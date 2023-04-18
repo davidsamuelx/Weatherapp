@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="zero">0dp</dimen>
+
+    <dimen name="spacing_small">4dp</dimen>
+    <dimen name="spacing_normal">8dp</dimen>
+    <dimen name="spacing_x_normal">12dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_xlarge">32dp</dimen>
+
+    <dimen name="font_size_title">16sp</dimen>
+    <dimen name="font_size_body">14sp</dimen>
+    <dimen name="font_size_caption">12sp</dimen>
+    <dimen name="font_size_title_medium">20sp</dimen>
+    <dimen name="font_size_title_large">24sp</dimen>
+    <dimen name="font_size_title_x_large">48sp</dimen>
+
+    <dimen name="radius_normal">8dp</dimen>
+    <dimen name="radius_medium">16dp</dimen>
+
+    <dimen name="search_icon_size">40dp</dimen>
+
+    <dimen name="weather_image_width">184dp</dimen>
+    <dimen name="weather_image_height">168dp</dimen>
+    <dimen name="height_input">56</dimen>
+
+    <dimen name="item_card_search_width">328dp</dimen>
+    <dimen name="item_card_search_height">104dp</dimen>
+
+    <dimen name="item_cloth_height">220dp</dimen>
+
+</resources>

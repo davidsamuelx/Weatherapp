@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/color_background"
+    android:fillViewport="true"
+    android:scrollbars="none">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_background">
+
+        <ImageView
+            android:id="@+id/search_icon"
+            android:layout_width="@dimen/search_icon_size"
+            android:layout_height="@dimen/search_icon_size"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:background="@drawable/search_icon_background"
+            android:src="@drawable/icons8_search_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/weather_image"
+            android:layout_width="@dimen/weather_image_width"
+            android:layout_height="@dimen/weather_image_width"
+            android:layout_marginTop="@dimen/spacing_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/sunny" />
+
+        <TextView
+            android:id="@+id/city_name_text_view"
+            style="@style/TextStyle.Title.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            tools:text="Alexandra"
+            android:textColor="@color/color_text_primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weather_image" />
+        
+        <TextView
+            android:id="@+id/text_view_weather_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="sunny"
+            app:layout_constraintTop_toBottomOf="@id/city_name_text_view"
+            app:layout_constraintStart_toEndOf="@id/text_view_country_name"
+            app:layout_constraintEnd_toEndOf="@id/city_name_text_view"
+            android:textColor="@color/color_text_primary"
+            android:textSize="@dimen/font_size_body"
+            />
+
+        <TextView
+            android:id="@+id/text_view_country_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Egypt"
+            app:layout_constraintTop_toBottomOf="@id/city_name_text_view"
+            app:layout_constraintStart_toStartOf="@id/city_name_text_view"
+            app:layout_constraintEnd_toStartOf="@id/text_view_weather_description"
+            android:textColor="@color/color_text_primary"
+            android:textSize="@dimen/font_size_body"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:src="@drawable/vector"
+            app:layout_constraintBottom_toBottomOf="@id/city_name_text_view"
+            app:layout_constraintStart_toEndOf="@id/city_name_text_view"
+            app:layout_constraintTop_toTopOf="@id/city_name_text_view" />
+
+        <TextView
+            android:id="@+id/degree"
+            style="@style/TextStyle.Title.Xlarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="28"
+            android:textColor="@color/color_primary"
+            app:layout_constraintEnd_toEndOf="@id/city_name_text_view"
+            app:layout_constraintStart_toStartOf="@id/city_name_text_view"
+            app:layout_constraintTop_toBottomOf="@id/text_view_weather_description" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/component_2"
+            app:layout_constraintBottom_toBottomOf="@id/degree"
+            app:layout_constraintStart_toEndOf="@id/degree"
+            app:layout_constraintTop_toTopOf="@id/degree"
+            app:layout_constraintVertical_bias="0.13999999" />
+
+        <include
+            android:id="@+id/weather_card"
+            layout="@layout/item_weather_details_card"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/degree" />
+
+        <TextView
+            android:id="@+id/text_view_suggestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/suggestion_for_you"
+            app:layout_constraintTop_toBottomOf="@id/weather_card"
+            app:layout_constraintStart_toStartOf="@id/weather_card"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            style="@style/TextStyle.title"
+            />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view_cloths"
+            android:layout_width="@dimen/zero"
+            android:layout_height="@dimen/item_cloth_height"
+            android:background="@drawable/card_shape"
+            app:layout_constraintEnd_toEndOf="@id/weather_card"
+            app:layout_constraintStart_toStartOf="@id/weather_card"
+            app:layout_constraintTop_toBottomOf="@id/text_view_suggestion"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/spacing_normal"
+            app:cardCornerRadius="@dimen/radius_medium"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            >
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/image_view_cloths_suggestion"
+                android:background="@drawable/card_shape"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:srcCompat="@tools:sample/backgrounds/scenic"
+                android:scaleType="centerCrop"
+                />
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
