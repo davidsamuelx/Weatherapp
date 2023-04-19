@@ -20,75 +20,76 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView{
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentHomeBinding
     get() = FragmentHomeBinding::inflate
     private lateinit var presenter: HomePresenter
-    private var weatherData = listOf<Weather>()
-    var data: Weather? = null
+    private var weather: Weather? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter = HomePresenter(this)
-        presenter.homestart("cairo")
         arguments?.let {
-            data = it.getSerializable(Constant.DATA) as? Weather
-            setDataToUi()
+            weather = it.getSerializable(Constant.DATA) as? Weather
+            setDataToUi(weather!!)
+        } ?: run {
+            presenter = HomePresenter(this)
+            presenter.homestart()
         }
-        data?.location?.name?.let { this.presenter.homestart(it) }
-        Log.i("test", data?.current?.temp_c.toString())
+
         binding.searchIcon.setOnClickListener {
             navigateToFragment(SearchFragment())
         }
 
+
     }
 
-    private fun setDataToUi(){
-        val summerClothes = listOf(
-            R.drawable.summer1,
-            R.drawable.summer,
-            R.drawable.summer3,
-            R.drawable.summer4,
-            R.drawable.summer6,
-        )
+    private fun setDataToUi(data: Weather){
+        requireActivity().runOnUiThread {
+            val summerClothes = listOf(
+                R.drawable.summer1,
+                R.drawable.summer,
+                R.drawable.summer3,
+                R.drawable.summer4,
+                R.drawable.summer6,
+            )
 
-        val winterClothes = listOf(
-             R.drawable.winter2, R.drawable.winter3, R.drawable.winter4,
-            R.drawable.winter5, R.drawable.winter6, R.drawable.winter8,
-            R.drawable.winter9,
-        )
+            val winterClothes = listOf(
+                R.drawable.winter2, R.drawable.winter3, R.drawable.winter4,
+                R.drawable.winter5, R.drawable.winter6, R.drawable.winter8,
+                R.drawable.winter9,
+            )
 
-        with(binding){
-            textViewCountryName.text = data?.location?.country
-            cityNameTextView.text = data?.location?.name
-            degree.text = data?.current?.temp_c.toString()
-            textViewWeatherDescription.text = data?.current?.condition?.text
+            with(binding) {
+                textViewCountryName.text = data.location.country
+                cityNameTextView.text = data.location.name
+                degree.text = data.current.temp_c.toString()
+                textViewWeatherDescription.text = data.current.condition.text
 
-            weatherCard.apply {
-                textViewWindSpeed.text = data?.current?.wind_kph.toString()
-                textViewUvPercent.text = data?.current?.uv.toString()
-                textViewCloudPercent.text = data?.current?.cloud.toString()
-                textViewHumidityPercent.text = data?.current?.humidity.toString()
-                textViewFeelsLikeDegree.text = data?.current?.feelslike_c.toString()
+                weatherCard.apply {
+                    textViewWindSpeed.text = data.current.wind_kph.toString()
+                    textViewUvPercent.text = data.current.uv.toString()
+                    textViewCloudPercent.text = data.current.cloud.toString()
+                    textViewHumidityPercent.text = data.current.humidity.toString()
+                    textViewFeelsLikeDegree.text = data.current.feelslike_c.toString()
+                }
+
+                binding.weatherImage.setImageResource(
+                    when (data.current.condition.text) {
+                        SUNNY -> R.drawable.sunny
+                        MIST -> R.drawable.mist
+                        FOG -> R.drawable.mist
+                        CLEAR -> R.drawable.clear
+                        else -> R.drawable.cloudy
+                    }
+                )
+
+                val temperature = data.current.temp_c
+                binding.imageViewClothsSuggestion.setImageResource(
+                    when (temperature) {
+                        in WINTER_RANGE -> winterClothes.shuffled()[0]
+                        in SUMMER_RANGE -> summerClothes.shuffled()[0]
+                        else -> R.drawable.summer
+                    }
+                )
             }
-
-            binding.weatherImage.setImageResource(
-                when(data?.current?.condition?.text){
-                    SUNNY -> R.raw.weather_cloudy
-                    MIST -> R.raw.weather_mist
-                    FOG  -> R.raw.weather_mist
-                    CLEAR -> R.raw.sunny
-                    else -> R.raw.weather_windy
-                }
-            )
-
-            val temperature = data?.current?.temp_c ?: 0.0
-            binding.imageViewClothsSuggestion.setImageResource(
-                when (temperature) {
-                    in WINTER_RANGE -> winterClothes.shuffled()[0]
-                    in SUMMER_RANGE -> summerClothes.shuffled()[0]
-                    else -> R.drawable.summer
-                }
-            )
         }
     }
-
 
 
     private fun navigateToFragment(fragment: Fragment) {
@@ -108,8 +109,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView{
         Log.v(LOG_TAG, "hideLoading")
     }
 
-    override fun onHomeSuccess() {
+    override fun onHomeSuccess(data: Weather) {
         Log.v(LOG_TAG, "onStartSuccess")
+        weather = data
+        setDataToUi(weather!!)
     }
 
     override fun onHomeFailure(error: String) {

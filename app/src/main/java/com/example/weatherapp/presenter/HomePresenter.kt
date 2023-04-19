@@ -1,5 +1,6 @@
 package com.example.weatherapp.presenter
 
+import android.util.Log
 import com.example.weatherapp.model.ApiServiceImpl
 import com.example.weatherapp.model.data.Weather
 import com.example.weatherapp.ui.fragments.home.IHomeView
@@ -14,9 +15,9 @@ class HomePresenter(
 ) {
     private val apiService = ApiServiceImpl()
 
-    fun homestart(country: String = "cairo"){
+    fun homestart(country: String? = "cairo"){
         view.showLoading()
-        apiService.getCityWeather(country).enqueue(object : Callback {
+        apiService.getCityWeather(country ?: "cairo").enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 view.onHomeFailure(e.toString())
                 view.hideLoading()
@@ -24,11 +25,13 @@ class HomePresenter(
 
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string()?.let { jsonString ->
+                    Log.i("test", jsonString)
                     val data = Gson().fromJson(jsonString, Weather::class.java)
-                    view.onHomeSuccess()
+                    view.onHomeSuccess(data)
                 }
                 view.hideLoading()
             }
         })
     }
+
 }

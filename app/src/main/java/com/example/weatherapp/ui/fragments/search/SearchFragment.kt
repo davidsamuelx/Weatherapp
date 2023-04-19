@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentSearchBinding
@@ -25,8 +24,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), ISearchView,Search
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         presenter = SearchPresenter(this)
-        binding.searchViewEditText.addTextChangedListener {
-            val country = binding.searchViewEditText.text.toString()
+        binding.textInputLayoutSearchHome.setEndIconOnClickListener {
+            val country = binding.editTextSearchHome.text.toString()
             presenter.getSearchData(country)
         }
         binding.recyclerViewTeamTasks.adapter = adapter

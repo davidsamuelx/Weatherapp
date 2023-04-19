@@ -65,6 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Egypt"
+            android:paddingHorizontal="@dimen/spacing_normal"
             app:layout_constraintTop_toBottomOf="@id/city_name_text_view"
             app:layout_constraintStart_toStartOf="@id/city_name_text_view"
             app:layout_constraintEnd_toStartOf="@id/text_view_weather_description"
@@ -104,32 +105,31 @@
         <include
             android:id="@+id/weather_card"
             layout="@layout/item_weather_details_card"
-            android:layout_width="360dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_large"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/card_view_cloths"
+            app:layout_constraintStart_toStartOf="@id/card_view_cloths"
             app:layout_constraintTop_toBottomOf="@id/degree" />
 
         <TextView
             android:id="@+id/text_view_suggestion"
+            style="@style/TextStyle.title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/suggestion_for_you"
-            app:layout_constraintTop_toBottomOf="@id/weather_card"
-            app:layout_constraintStart_toStartOf="@id/weather_card"
             android:layout_marginTop="@dimen/spacing_large"
-            android:layout_marginBottom="@dimen/spacing_medium"
-            style="@style/TextStyle.title"
-            />
+            android:text="@string/suggestion_for_you"
+            app:layout_constraintStart_toStartOf="@id/card_view_cloths"
+            app:layout_constraintTop_toBottomOf="@id/weather_card" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_view_cloths"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_width="@dimen/zero"
             android:layout_height="@dimen/item_cloth_height"
             android:background="@drawable/card_shape"
-            app:layout_constraintEnd_toEndOf="@id/weather_card"
-            app:layout_constraintStart_toStartOf="@id/weather_card"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_view_suggestion"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="@dimen/spacing_normal"
@@ -139,12 +139,11 @@
 
             <androidx.constraintlayout.utils.widget.ImageFilterView
                 android:id="@+id/image_view_cloths_suggestion"
-                android:background="@drawable/card_shape"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:srcCompat="@tools:sample/backgrounds/scenic"
+                android:background="@drawable/card_shape"
                 android:scaleType="centerCrop"
-                />
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
         </com.google.android.material.card.MaterialCardView>
 
 

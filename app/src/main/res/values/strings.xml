@@ -2,4 +2,10 @@
     <string name="app_name">Weather app</string>
     <string name="search">search</string>
     <string name="suggestion_for_you">Suggestion for you</string>
+    <string name="search_city">Search city</string>
+    <string name="feels_like">Feels like</string>
+    <string name="uv">UV</string>
+    <string name="clouds">Clouds</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind">Wind</string>
 </resources>

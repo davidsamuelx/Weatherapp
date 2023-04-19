@@ -6,33 +6,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/color_background">
 
-    <EditText
-        android:id="@+id/search_view_edit_text"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:layout_width="0dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_search_home"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_medium"
+        android:textColorHint="@color/color_primary"
+        app:boxCornerRadiusBottomEnd="@dimen/spacing_large"
+        app:boxCornerRadiusBottomStart="@dimen/spacing_large"
+        app:boxCornerRadiusTopEnd="@dimen/spacing_large"
+        app:boxCornerRadiusTopStart="@dimen/spacing_large"
+        app:boxStrokeColor="@color/color_primary"
         app:layout_constraintEnd_toEndOf="parent"
+        app:endIconMode="custom"
+        app:endIconTint="@color/color_primary"
+        app:endIconDrawable="@drawable/icons8_search_24"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_height="@dimen/height_input"
-        android:layout_marginHorizontal="@dimen/spacing_medium"
-        android:background="@drawable/card_background"
-        android:drawableStart="@drawable/icons8_search_24"
-        android:drawableTint="@color/color_text_tertiary"
-        android:drawablePadding="@dimen/spacing_medium"
-        android:padding="@dimen/spacing_medium"
-        android:hint="@string/search"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:imeOptions="actionSearch"
-        android:textSize="@dimen/font_size_body"
-        android:textColor="@color/color_text_primary"
-        android:textColorHint="@color/color_text_tertiary"
-        android:importantForAutofill="no"
-        android:inputType="text" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_search_home"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/search_city"
+            android:textSize="@dimen/font_size_body"
+            android:textColorHint="@color/color_text_secondary" />
+    </com.google.android.material.textfield.TextInputLayout>
     
     <androidx.recyclerview.widget.RecyclerView
         app:layout_goneMarginTop="@dimen/spacing_medium"
-        app:layout_constraintTop_toBottomOf="@id/search_view_edit_text"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_search_home"
         android:id="@+id/recycler_view_team_tasks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
